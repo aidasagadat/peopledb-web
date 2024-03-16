@@ -29,8 +29,8 @@ Here are some people:
             <th scope="row" th:text="${people.id}">1</th>
             <td th:text="${people.firstName}">Mark</td>
             <td th:text="${people.lastName}">Otto</td>
-            <td th:text="${people.dob}">@mdo</td>
-            <td th:text="${people.salary}">@mdo</td>
+            <td th:text="${{people.dob}}">@mdo</td>
+            <td th:text="${{people.salary}}">@mdo</td>
         </tr>
         </tbody>
     </table>
