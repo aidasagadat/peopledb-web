@@ -6,11 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/people")
 
+@RequestMapping("/people")
+@Controller
 public class PeopleController {
 
     private PersonRepository personRepository;
@@ -24,8 +25,33 @@ public class PeopleController {
         return personRepository.findAll();
     }
 
+    @ModelAttribute
+    public Person getPerson(){
+        return new Person();
+    }
+
     @GetMapping
-    public String showPeoplePage(Model model){
+    public String showPeoplePage(){
         return "people";
     }
+
+    @PostMapping
+    public String savePerson(Person person){
+        System.out.println(person);
+        return "people";
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
