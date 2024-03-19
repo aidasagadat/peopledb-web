@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
-@RequestMapping("/people")
 @Controller
+@RequestMapping("/people")
 public class PeopleController {
 
     private PersonRepository personRepository;
