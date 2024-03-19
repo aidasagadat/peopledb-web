@@ -13,29 +13,38 @@ Here are some people:
     <li th:each="people : ${people}" th:text="${people}">My Junk Person</li>
 </ol>
 
-<div class="col-8 mx-auto">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">FirstName</th>
-            <th scope="col">LastName</th>
-            <th scope="col">DOB</th>
-            <th scope="col">Email</th>
-            <th scope="col">Salary</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="people : ${people}">
-            <th scope="row" th:text="${people.id}">1</th>
-            <td th:text="${people.firstName}">Mark</td>
-            <td th:text="${people.lastName}">Otto</td>
-            <td th:text="${{people.dob}}">@mdo</td>
-            <td th:text="${people.email}">@mdo</td>
-            <td th:text="${{people.salary}}">@mdo</td>
-        </tr>
-        </tbody>
-    </table>
+<div class="col-md-8 mx-auto mt-5 col-sm-12">
+    <form method="post">
+        <table class="table table-bordered table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Select</th>
+                <th scope="col">id</th>
+                <th scope="col">FirstName</th>
+                <th scope="col">LastName</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Email</th>
+                <th scope="col">Salary</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(people)}">
+                <td colspan="6" class="text-center">NO DATA</td>
+            </tr>
+            <tr th:each="people : ${people}">
+                <td><input type="checkbox" name="selections" th:value="${person.id}"></td>
+                <th scope="row" th:text="${people.id}">1</th>
+                <td th:text="${people.firstName}">Mark</td>
+                <td th:text="${people.lastName}">Otto</td>
+                <td th:text="${{people.dob}}">@mdo</td>
+                <td th:text="${people.email}">@mdo</td>
+                <td th:text="${{people.salary}}">@mdo</td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="button" name="edit" value="true" class="btn btn-primary me-2">EDIT</button>
+        <button type="button" name="delete" value="true" class="btn btn-danger">DELETE</button>
+    </form>
 
 
 
@@ -47,6 +56,9 @@ Here are some people:
         <div class="form-group">
             <label for="firstname">First name</label>
             <input type="text" class="form-control" id="firstname" th:field="*{firstName}" aria-describedby="firstNameHelp" placeholder="Enter first name">
+            <div id="validationFirstName" class="invalid-feedback">
+                Please choose a username.
+            </div>
         </div>
 
 
@@ -67,6 +79,7 @@ Here are some people:
             <label for="salary">Salary</label>
             <input type="number" class="form-control" id="salary" th:field="*{salary}" aria-describedby="emailHelp" placeholder="Enter salary">
         </div>
+        <input type="hidden" th:field="*{id}" />
 
 
         <button type="submit" class="btn btn-primary">Save person</button>
